@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Growth Sprint Form</title>
+    <!-- Tailwind CSS CDN - Loaded directly from a content delivery network -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Inter font and general aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: flex-start; /* Align content to the top */
+            min-height: 100vh; /* Minimum height of the viewport */
+            padding: 20px; /* Padding around the form container */
+        }
+        .form-container {
+            background-color: #ffffff; /* White background for the form */
+            padding: 30px; /* Inner padding */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            max-width: 800px; /* Maximum width of the form */
+            width: 100%; /* Full width up to max-width */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 3rem; /* Larger font size for the main title */
+            font-weight: 700; /* Bold font weight */
+            color: #1a202c; /* Dark grey color */
+            margin-bottom: 30px; /* Space below the title */
+            text-align: center; /* Center align the title text */
+        }
+        h3 {
+            font-size: 1.5rem; /* Font size for section titles */
+            font-weight: 600; /* Semi-bold font weight */
+            color: #2d3748; /* Slightly lighter dark grey */
+            margin-top: 25px; /* Space above section titles */
+            margin-bottom: 15px; /* Space below section titles */
+            padding-bottom: 5px; /* Padding below text for border */
+            border-bottom: 2px solid #edf2f7; /* Light grey border at the bottom */
+        }
+        label {
+            font-weight: 500; /* Medium font weight for labels */
+            color: #4a5568; /* Medium grey color */
+            margin-bottom: 8px; /* Space below labels */
+            display: block; /* Make labels block-level elements */
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%; /* Full width for input fields */
+            padding: 12px; /* Padding inside input fields */
+            border: 1px solid #cbd5e0; /* Light grey border */
+            border-radius: 8px; /* Rounded corners for inputs */
+            font-size: 1rem; /* Standard font size */
+            color: #2d3748; /* Dark grey text color */
+            background-color: #ffffff; /* White background */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition on focus */
+            -webkit-appearance: none; /* Remove default styling for selects on WebKit browsers */
+            -moz-appearance: none; /* Remove default styling for selects on Mozilla browsers */
+            appearance: none; /* Remove default styling for selects */
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none; /* Remove default outline on focus */
+            border-color: #4299e1; /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* Blue shadow on focus */
+        }
+        textarea {
+            min-height: 100px; /* Minimum height for text areas */
+            resize: vertical; /* Allow vertical resizing only */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Space between form groups */
+        }
+        .radio-group label, .checkbox-group label {
+            display: inline-flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically align items */
+            margin-right: 20px; /* Space between radio/checkbox options */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-weight: normal; /* Normal font weight */
+        }
+        .radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+            width: auto; /* Auto width for radio/checkbox inputs */
+            margin-right: 8px; /* Space between input and label text */
+            transform: scale(1.2); /* Slightly larger size for easier clicking */
+        }
+        .submit-button {
+            background-color: #4299e1; /* Blue background */
+            color: white; /* White text */
+            padding: 15px 25px; /* Padding */
+            border: none; /* No border */
+            border-radius: 10px; /* Rounded corners */
+            font-size: 1.125rem; /* Larger font size */
+            font-weight: 600; /* Semi-bold font weight */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+            width: 100%; /* Full width */
+            margin-top: 30px; /* Space above button */
+            box-shadow: 0 4px 10px rgba(66, 153, 225, 0.3); /* Soft shadow */
+        }
+        .submit-button:hover {
+            background-color: #3182ce; /* Darker blue on hover */
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+        .submit-button:active {
+            transform: translateY(0); /* Return to original position on click */
+            box-shadow: 0 2px 5px rgba(66, 153, 225, 0.3); /* Smaller shadow on click */
+        }
+        .llm-button {
+            background-color: #6b46c1; /* Purple color for LLM feature */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding */
+            border: none; /* No border */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 1rem; /* Standard font size */
+            font-weight: 500; /* Medium font weight */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+            margin-top: 15px; /* Space above button */
+            box-shadow: 0 2px 5px rgba(107, 70, 193, 0.3); /* Soft shadow */
+        }
+        .llm-button:hover {
+            background-color: #553c9a; /* Darker purple on hover */
+            transform: translateY(-1px); /* Slight lift effect on hover */
+        }
+        .llm-button:active {
+            transform: translateY(0); /* Return to original position on click */
+            box-shadow: 0 1px 3px rgba(107, 70, 193, 0.3); /* Smaller shadow on click */
+        }
+        .loading-indicator {
+            display: none; /* Hidden by default */
+            margin-top: 10px; /* Space above indicator */
+            font-style: italic; /* Italic text */
+            color: #718096; /* Grey text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Agent Growth Sprint Form</h2>
+        <form>
+            <!-- Section 1: Sprint Details -->
+            <h3>Section 1: Sprint Details</h3>
+            <div class="form-group">
+                <label for="agentName">Agent Name:</label>
+                <select id="agentName" name="agentName" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" required>
+                    <option value="">Select Agent</option>
+                    <option value="alice-johnson">Alice Johnson</option>
+                    <option value="bob-smith">Bob Smith</option>
+                    <option value="charlie-brown">Charlie Brown</option>
+                    <option value="diana-prince">Diana Prince</option>
+                    <option value="ethan-hunt">Ethan Hunt</option>
+                    <!-- Add more agents here as needed -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfSprint">Date of Sprint:</label>
+                <input type="date" id="dateOfSprint" name="dateOfSprint" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" required>
+            </div>
+
+            <div class="form-group">
+                <label for="managerName">Manager Name:</label>
+                <select id="managerName" name="managerName" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" required>
+                    <option value="">Select Manager</option>
+                    <option value="manager-alpha">Manager Alpha</option>
+                    <option value="manager-beta">Manager Beta</option>
+                    <option value="manager-gamma">Manager Gamma</option>
+                    <!-- Add more managers here as needed -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sprintPeriod">Sprint Period:</label>
+                <select id="sprintPeriod" name="sprintPeriod" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" required>
+                    <option value="">Select Period</option>
+                    <script>
+                        // Dynamically generate mid-month and end-of-month options for the next 12 months
+                        const today = new Date();
+                        for (let i = 0; i < 12; i++) { // Loop for 12 months
+                            const date = new Date(today.getFullYear(), today.getMonth() + i, 1);
+                            const monthYear = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+                            document.write(`<option value="Mid-Month ${monthYear}">Mid-Month ${monthYear}</option>`);
+                            document.write(`<option value="End-of-Month ${monthYear}">End-of-Month ${monthYear}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+
+            <!-- Section 2: Quantitative Performance (Last 60 Days - Raw Data) -->
+            <h3>Section 2: Quantitative Performance (Last 60 Days - Raw Data)</h3>
+            <div class="form-group">
+                <label for="doorsKnocked">Doors Knocked (Daily Average - Last 60 Days):</label>
+                <input type="number" id="doorsKnocked" name="doorsKnocked" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" placeholder="e.g., 78" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="setCount">Set Count (Total - Last 60 Days):</label>
+                <input type="number" id="setCount" name="setCount" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" placeholder="e.g., 22" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="opportunityCount">Opportunity Count (Total - Last 60 Days):</label>
+                <input type="number" id="opportunityCount" name="opportunityCount" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" placeholder="e.g., 14" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="daysOutOfField">Days Out of Field (Sick, Vacation, Approved Leave - Last 60 Days):</label>
+                <input type="number" id="daysOutOfField" name="daysOutOfField" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3" placeholder="e.g., 5" min="0" required>
+            </div>
+
+            <!-- Section 3: Observed Application of Principles -->
+            <h3>Section 3: Observed Application of Principles</h3>
+            <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Internal Drive & Professionalism:</label>
+                <p class="text-sm text-gray-600 mb-3">How well did the agent demonstrate personal discipline, resilience, honesty, a commitment to continuous learning, and overall professionalism?</p>
+                <div class="radio-group flex flex-wrap gap-4">
+                    <label>
+                        <input type="radio" name="internalDrive" value="strong" class="form-radio text-blue-600">
+                        Strong
+                    </label>
+                    <label>
+                        <input type="radio" name="internalDrive" value="developing" class="form-radio text-blue-600">
+                        Developing
+                    </label>
+                    <label>
+                        <input type="radio" name="internalDrive" value="needsFocus" class="form-radio text-blue-600">
+                        Needs Focus
+                    </label>
+                </div>
+                <label for="internalDriveObservations" class="mt-4">Manager Observations:</label>
+                <textarea id="internalDriveObservations" name="internalDriveObservations" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Effective Communication & Engagement:</label>
+                <p class="text-sm text-gray-600 mb-3">How effectively did the agent engage homeowners, build rapport, and ethically guide conversations towards securing appointments?</p>
+                <div class="radio-group flex flex-wrap gap-4">
+                    <label>
+                        <input type="radio" name="effectiveCommunication" value="strong" class="form-radio text-blue-600">
+                        Strong
+                    </label>
+                    <label>
+                        <input type="radio" name="effectiveCommunication" value="developing" class="form-radio text-blue-600">
+                        Developing
+                    </label>
+                    <label>
+                        <input type="radio" name="effectiveCommunication" value="needsFocus" class="form-radio text-blue-600">
+                        Needs Focus
+                    </label>
+                </div>
+                <label for="effectiveCommunicationObservations" class="mt-4">Manager Observations:</label>
+                <textarea id="effectiveCommunicationObservations" name="effectiveCommunicationObservations" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <!-- Section 4: Growth Discussion & Next Steps -->
+            <h3>Section 4: Growth Discussion & Next Steps</h3>
+            <div class="form-group">
+                <label for="quantitativeReview" class="mb-2">Review of Quantitative Data:</label>
+                <p class="text-sm text-gray-600 mb-3">"Looking at your recent performance, your daily Doors Knocked average is <span id="dkAvgDisplay" class="font-semibold text-gray-800">[DK Avg.]</span>, your total Set Count is <span id="scTotalDisplay" class="font-semibold text-gray-800">[SC Total]</span>, and your total Opportunity Count is <span id="ocTotalDisplay" class="font-semibold text-gray-800">[OC Total]</span> over the last 60 days. We also note you had <span id="daysOutDisplay" class="font-semibold text-gray-800">[Days Out of Field]</span> days out of the field."</p>
+                <p class="text-sm text-gray-600 mb-3">"Based on our company's expectations, this indicates <span id="expectationsDisplay" class="font-semibold text-gray-800">[e.g., strong performance, good progress, an area for focus]</span> in these areas."</p>
+            </div>
+
+            <div class="form-group">
+                <label for="keyStrengths">Key Strengths Observed:</label>
+                <textarea id="keyStrengths" name="keyStrengths" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="primaryAreaGrowth">Primary Area(s) for Growth:</label>
+                <textarea id="primaryAreaGrowth" name="primaryAreaGrowth" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+                <!-- LLM feature button -->
+                <button type="button" id="generateGrowthSuggestion" class="llm-button">Generate Growth Suggestion ✨</button>
+                <div id="llmLoading" class="loading-indicator">Generating suggestion...</div>
+                <div id="llmSuggestionOutput" class="mt-3 p-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-md" style="display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="actionableSteps">Actionable Step(s) for Agent:</label>
+                <textarea id="actionableSteps" name="actionableSteps" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="managerSupport">Manager Support:</label>
+                <textarea id="managerSupport" name="managerSupport" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="agentComments">Agent's Comments/Feedback (Optional):</label>
+                <textarea id="agentComments" name="agentComments" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <!-- Section 5: Manager Internal Notes & Follow-Up -->
+            <h3>Section 5: Manager Internal Notes & Follow-Up</h3>
+            <div class="form-group">
+                <label class="flex items-center">
+                    <input type="checkbox" id="performanceConversationNeeded" name="performanceConversationNeeded" value="yes" class="form-checkbox text-blue-600 rounded">
+                    <span class="ml-2 text-gray-700">Performance Conversation Needed?</span>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="performanceConversationDetails">If Yes, Details for Performance Conversation:</label>
+                <textarea id="performanceConversationDetails" name="performanceConversationDetails" rows="4" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfLastWarning">Date of Last Formal Warning (if any):</label>
+                <input type="date" id="dateOfLastWarning" name="dateOfLastWarning" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3">
+            </div>
+
+            <div class="form-group">
+                <label for="typeOfLastWarning">Type of Last Formal Warning (if any):</label>
+                <select id="typeOfLastWarning" name="typeOfLastWarning" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3">
+                    <option value="N/A">N/A</option>
+                    <option value="Verbal">Verbal</option>
+                    <option value="Written">Written</option>
+                    <option value="Final">Final</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Growth Sprint</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to dynamically update the quantitative review text based on input
+        document.addEventListener('DOMContentLoaded', () => {
+            const dkInput = document.getElementById('doorsKnocked');
+            const scInput = document.getElementById('setCount');
+            const ocInput = document.getElementById('opportunityCount');
+            const daysOutInput = document.getElementById('daysOutOfField');
+
+            const dkDisplay = document.getElementById('dkAvgDisplay');
+            const scDisplay = document.getElementById('scTotalDisplay');
+            const ocDisplay = document.getElementById('ocTotalDisplay');
+            const daysOutDisplay = document.getElementById('daysOutDisplay');
+            const expectationsDisplay = document.getElementById('expectationsDisplay');
+
+            function updateQuantitativeReview() {
+                const dkAvg = dkInput.value || '[DK Avg.]';
+                const scTotal = scInput.value || '[SC Total]';
+                const ocTotal = ocInput.value || '[OC Total]';
+                const daysOut = daysOutInput.value || '[Days Out of Field]';
+
+                dkDisplay.textContent = dkAvg;
+                scDisplay.textContent = scTotal;
+                ocDisplay.textContent = ocTotal;
+                daysOutDisplay.textContent = daysOut;
+
+                // Simple example for expectations based on values.
+                // In a real scenario, this would likely be more complex, perhaps
+                // pulling from a backend system or a more detailed client-side logic.
+                let expectationText = '[e.g., strong performance, good progress, an area for focus]';
+                if (dkInput.value && scInput.value && ocInput.value) {
+                    const dkNum = parseInt(dkInput.value);
+                    const scNum = parseInt(scInput.value);
+                    const ocNum = parseInt(ocInput.value);
+
+                    // These thresholds are illustrative. You would define your actual company expectations.
+                    // For example, based on your previous document's scoring:
+                    // DK: 100+ for 3 points, 125+ for 4 points
+                    // SC: 25+ for 3 points, 30+ for 4 points
+                    // OC: 12+ for 4 points, 16+ for 6 points, 20+ for 8 points
+                    // You'll need to define clear raw number thresholds for 'strong', 'good progress', 'area for focus'
+                    // based on your company's actual performance goals.
+                    if (dkNum >= 100 && scNum >= 25 && ocNum >= 16) { // Example thresholds for 'strong'
+                        expectationText = 'strong performance';
+                    } else if (dkNum >= 75 && scNum >= 18 && ocNum >= 10) { // Example thresholds for 'good progress'
+                        expectationText = 'good progress';
+                    } else {
+                        expectationText = 'an area for focus';
+                    }
+                }
+                expectationsDisplay.textContent = expectationText;
+            }
+
+            dkInput.addEventListener('input', updateQuantitativeReview);
+            scInput.addEventListener('input', updateQuantitativeReview);
+            ocInput.addEventListener('input', updateQuantitativeReview);
+            daysOutInput.addEventListener('input', updateQuantitativeReview);
+
+            // Initial update in case fields are pre-filled by browser or script
+            updateQuantitativeReview();
+
+            // LLM Integration for Growth Suggestion
+            const generateButton = document.getElementById('generateGrowthSuggestion');
+            const internalDriveObs = document.getElementById('internalDriveObservations');
+            const effectiveCommObs = document.getElementById('effectiveCommunicationObservations');
+            const llmLoading = document.getElementById('llmLoading');
+            const llmSuggestionOutput = document.getElementById('llmSuggestionOutput');
+            const primaryAreaGrowth = document.getElementById('primaryAreaGrowth'); // Target textarea
+
+            generateButton.addEventListener('click', async () => {
+                const internalObsText = internalDriveObs.value.trim();
+                const effectiveCommText = effectiveCommObs.value.trim();
+
+                if (!internalObsText && !effectiveCommText) {
+                    llmSuggestionOutput.textContent = "Please provide observations in Section 3 to generate a suggestion.";
+                    llmSuggestionOutput.style.display = 'block';
+                    return;
+                }
+
+                llmLoading.style.display = 'block'; // Show loading indicator
+                llmSuggestionOutput.style.display = 'none'; // Hide previous output
+                llmSuggestionOutput.textContent = ''; // Clear previous output
+
+                const prompt = `Based on the following manager observations for an agent's performance sprint:
+
+Internal Drive & Professionalism Observations: "${internalObsText}"
+Effective Communication & Engagement Observations: "${effectiveCommText}"
+
+Please provide a concise, actionable suggestion for a primary area of growth for this agent. Focus on specific behaviors or skills they can develop. Start directly with the suggestion.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Leave as-is. Canvas will provide at runtime.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        llmSuggestionOutput.textContent = text;
+                        llmSuggestionOutput.style.display = 'block';
+
+                        // Optionally, auto-fill the 'Primary Area(s) for Growth' textarea
+                        primaryAreaGrowth.value = text;
+
+                    } else {
+                        llmSuggestionOutput.textContent = "Could not generate suggestion. Please try again or refine observations.";
+                        llmSuggestionOutput.style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    llmSuggestionOutput.textContent = "Error generating suggestion. Please check console for details.";
+                    llmSuggestionOutput.style.display = 'block';
+                } finally {
+                    llmLoading.style.display = 'none'; // Hide loading indicator
+                }
+            });
+        });
+    </script>
+</body>
+</html>
